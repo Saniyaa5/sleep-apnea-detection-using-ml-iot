@@ -30,7 +30,8 @@ load_dotenv()
 EMAIL_USER = os.getenv("EMAIL_USER") or st.secrets.get("EMAIL_USER") if "secrets" in dir(st) else None
 EMAIL_PASS = os.getenv("EMAIL_PASS") or st.secrets.get("EMAIL_PASS") if "secrets" in dir(st) else None
 
-MODEL_PATH = os.path.join(os.path.dirname(__file__), r"C:\Users\SANIYA SULTHANA\FYP_sleep_apnea\sleep_apnea_model.pkl")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "sleep_apnea_model.pkl")
 model = joblib.load(MODEL_PATH)
 @st.cache_resource
 def load_model():
@@ -427,4 +428,5 @@ elif st.session_state.get("logged_in") and st.session_state.get("role") == "admi
     st.dataframe(df_users)
 
     st.markdown("**Stored Patients**")
+
     st.dataframe(df_patients)
